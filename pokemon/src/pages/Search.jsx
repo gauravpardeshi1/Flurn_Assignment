@@ -32,8 +32,8 @@ import {
   TableContainer,
 } from '@chakra-ui/react'
 const Search = () => {
-  const[name,setname]=useState(null)
-  
+  const [name, setname] = useState(null)
+
   const dispatch = useDispatch()
   const searchloading = useSelector(store => store.datareducer.searchloading)
   const searcherror = useSelector(store => store.datareducer.searcherror)
@@ -45,21 +45,21 @@ const Search = () => {
     setname('')
 
   }
-  
+
   const handlebookmark = () => {
     toast.success("Bookmark Added..!!")
   }
 
   let Img = data?.sprites?.other?.home?.front_default
 
-  useEffect(()=>{
+  useEffect(() => {
     if (searcherror) {
       toast.error("No Result Found..!!", {
         position: toast.POSITION.BOTTOM_CENTER,
         autoClose: 10000
       });
     }
-  },[searcherror,searchloading,name])
+  }, [searcherror, searchloading, name])
   return (
     <>
 
@@ -73,7 +73,7 @@ const Search = () => {
           Search Pokemon here
         </Heading>
         <Box display='flex' justifyContent={'space-around'} gap='10px'>
-          <Input placeholder='Search here' type='text' value={name} onChange={(e)=>setname(e.target.value)}/>
+          <Input placeholder='Search here' type='text' value={name} onChange={(e) => setname(e.target.value)} />
           <Button onClick={handlesearch} colorScheme='blue'>Search</Button>
         </Box>
 
@@ -98,7 +98,7 @@ const Search = () => {
           direction={{ base: 'column', sm: 'row' }}
           overflow='hidden'
           variant='outline'
-
+          bg={`rgb(${data.height * 2 + data.weight}, ${data.weight * 2 - data.height}, 215)`}
           w='65%'
           margin='auto'
           mt='30px'
@@ -108,6 +108,7 @@ const Search = () => {
           <Image
             objectFit='cover'
             w='80%'
+
             src={Img}
             alt='Caffe Latte'
           />

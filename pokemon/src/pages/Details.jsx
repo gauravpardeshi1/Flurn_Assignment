@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { singledata } from '../redux/action';
+import { PostData, singledata } from '../redux/action';
 import { Box, Text, Heading, Image, Stack, Button, Center, SimpleGrid } from '@chakra-ui/react';
 import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
 import { BsFillBookmarkFill } from 'react-icons/bs'
@@ -31,30 +31,24 @@ const Details = () => {
   let Location = data?.location_area_encounters
   useEffect(() => {
     dispatch(singledata(name))
-    if(Location){
+    if (Location) {
       axios.get(Location)
-      .then((res) => setlocation(res.data))
+        .then((res) => setlocation(res.data))
     }
-   
+
   }, [Location])
 
 
 
 
   const handlebookmark = () => {
-    toast.success("Bookmark Added..!!")
+    toast.success("Added to Bookmark")
+
+    dispatch(PostData(data))
 
   }
 
-  // if (spinner) {
-  //   return <RotatingLines
-  //   strokeColor="grey"
-  //   strokeWidth="5"
-  //   animationDuration="0.75"
-  //   width="96"
-  //   visible={true}
-  // />
-  // }
+
 
   let Img = data?.sprites?.other?.home?.front_default
 
@@ -68,19 +62,19 @@ const Details = () => {
   return (
     <>
       <Toaster />
-      <Center mt='20px'> 
+      <Center mt='20px'>
 
-      
-      {spinner && <RotatingLines
-    strokeColor="green"
-    strokeWidth="5"
-    animationDuration="0.75"
-    width="96"
-    mt='20px'
-    visible={true}
-  />}
-  </Center>
-      <Box w='80%'  margin='auto' boxShadow='rgba(0, 0, 0, 0.15) 0px 2px 8px'>
+
+        {spinner && <RotatingLines
+          strokeColor="green"
+          strokeWidth="5"
+          animationDuration="0.75"
+          width="96"
+          mt='20px'
+          visible={true}
+        />}
+      </Center>
+      <Box w='80%' bg={`rgb(${data.height * 2 + data.weight}, ${data.weight * 2 - data.height}, 215)`} key={data?.name} margin='auto' boxShadow='rgba(0, 0, 0, 0.15) 0px 2px 8px'>
 
         <Card
           direction={{ base: 'column', sm: 'row' }}
@@ -92,6 +86,7 @@ const Details = () => {
           mt='30px'
           display={{ lg: 'flex' }}
           justifyContent={'space-evenly'}
+          bg={`rgb(${data.height * 2 + data.weight}, ${data.weight * 2 - data.height}, 215)`}
         >
           <Center>
             <Image
@@ -148,7 +143,7 @@ const Details = () => {
           </Stack>
 
         </Card>
-        <Box w='90%' margin='auto'  padding='10px' >
+        <Box w='90%' margin='auto' padding='10px' >
           <TableContainer border='1px solid lightgray' padding='10px'>
             <Text textAlign={'left'} fontWeight={500} fontSize={17} color='gray.500'>LOCATION</Text>
             <Table  >
@@ -161,7 +156,7 @@ const Details = () => {
               </Thead>
               <Tbody>
                 <SimpleGrid columns={{ sm: 2, lg: 3 }}>
-                  {location?.map((e) => <Tr  color='gray'  >
+                  {location?.map((e) => <Tr color='gray'  >
                     <Td borderBottom={'none'} fontSize={12}>{e?.location_area?.name}</Td>
                   </Tr>)}
                 </SimpleGrid>

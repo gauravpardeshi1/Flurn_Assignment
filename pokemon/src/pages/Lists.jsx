@@ -1,51 +1,77 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getdata } from '../redux/action'
-import { Box, SimpleGrid, Text, Button } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
 
-import { Spinner } from '@chakra-ui/react'
+import { Box, SimpleGrid, Text, Button, Image, Center } from '@chakra-ui/react'
+
+import axios from 'axios'
+import Card from './Card'
+
 
 const Lists = () => {
-  const [page, setpage] = useState(20)
-  const dispatch = useDispatch()
-  const data = useSelector(store => store.datareducer.data)
-  const spinner = useSelector(store => store.datareducer.isLoading)
-  useEffect(() => {
-    dispatch(getdata(page))
+  const [pokeData, setPokeData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/")
+  const [nextUrl, setNextUrl] = useState();
+  const [prevUrl, setPrevUrl] = useState();
 
-  }, [page])
-  console.log("d", spinner);
-  if (spinner) {
-    return <Spinner
-      mt='30px'
-      thickness='4px'
-      speed='0.65s'
-      emptyColor='gray.200'
-      color='blue.500'
-      size='xl'
-    />
+
+
+
+  const pokeFun = async () => {
+    setLoading(true)
+    const res = await axios.get(`${url}??offset=20&limit=10`);
+    setNextUrl(res.data.next);
+    setPrevUrl(res.data.previous);
+    getPokemon(res.data.results)
+    setLoading(false)
   }
+  const getPokemon = async (res) => {
+    res.map(async (item) => {
+      const result = await axios.get(item.url)
+      setPokeData(state => {
+        state = [...state, result.data]
+        state.sort((a, b) => a.id > b.id ? 1 : -1)
+        return state;
+      })
+    })
+  }
+  useEffect(() => {
+    pokeFun();
+
+  }, [url])
+
+
+
+
+
   return (
     <>
 
-      <Box padding={'20px'}>
-        <SimpleGrid columns={{ sm: 1, md: 3, lg: 5 }} gap='20px'>
+      <div className="container">
+        <Box className="left-content">
+          <Card pokemon={pokeData} loading={loading} />
 
-          {data?.map((el) => <Link to={`/details/${el.name}`}><Box border='1px solid gray' >
-            <Text>{el.name}</Text>
+          <Box className="btn-group" w={{ sm: '30%', lg: '50%' }} display='flex' justifyContent={'space-evenly'}>
+            {prevUrl && <Button colorScheme='blue' onClick={() => {
+              setPokeData([])
+              setUrl(prevUrl)
+            }}>Previous</Button >}
 
-          </Box></Link>)}
-        </SimpleGrid>
-      </Box>
+            {nextUrl && <Button colorScheme='blue' onClick={() => {
+              setPokeData([])
+              setUrl(nextUrl)
+            }}>Next</Button >}
 
-      <Box w='20%' margin='auto' display={'flex'} justifyContent={'space-evenly'}>
-        <Button isDisabled={page == 20 ? true : false} onClick={() => setpage(page - 20)}>Previous</Button>
-        <Button>{page / 20}</Button>
-        <Button onClick={() => setpage(page + 20)}>Next</Button>
-      </Box>
+          </Box>
+
+        </Box>
+
+      </div>
+
+
     </>
   )
 }
 
 export default Lists
+
+
