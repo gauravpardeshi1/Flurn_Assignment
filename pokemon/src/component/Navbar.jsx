@@ -31,7 +31,8 @@ export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box w='100%' bg={useColorModeValue('white', 'gray.800')}>
+    <Box 
+     w='100%' bg={useColorModeValue('white', 'gray.800')}>
       <Flex boxShadow='rgba(0, 0, 0, 0.1) 0px 1px 2px 0px' h={16} bg='rgb(64, 174, 144)' color='white' fontWeight={600} fontSize={20} alignItems="center" justifyContent="space-evenly" mx="auto">
 
         <HStack spacing={8} alignItems="center">

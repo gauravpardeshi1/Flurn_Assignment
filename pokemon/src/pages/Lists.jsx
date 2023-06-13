@@ -50,7 +50,7 @@ const Lists = () => {
         <Box className="left-content">
           <Card pokemon={pokeData} loading={loading} />
 
-          <Box className="btn-group" w={{ sm: '30%', lg: '50%' }} display='flex' justifyContent={'space-evenly'}>
+          <Box className="btn-group" w={{ sm: '20%', lg: '20%' }} display='flex' justifyContent={'space-evenly'}>
             {prevUrl && <Button colorScheme='blue' onClick={() => {
               setPokeData([])
               setUrl(prevUrl)
