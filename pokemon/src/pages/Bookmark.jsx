@@ -30,9 +30,12 @@ const Bookmark = () => {
                 <Text fontSize={18} fontWeight={400}>Height:-{e.height}</Text>
                 <Text fontSize={18} fontWeight={400}>Weight:-{e.weight}</Text>
                 <Button colorScheme='blue' mt='5px' onClick={async () => {
-                  await axios.delete(`https://nice-tan-octopus-toga.cyclic.app/bookmark/${e.id}`)
-                  setupdate(!update)
                   toast.success("Removed Successfully")
+                  setupdate(!update)
+                  await axios.delete(`https://nice-tan-octopus-toga.cyclic.app/bookmark/${e.id}`)
+                 
+                  
+                  
                 }} >Remove From Bookmark</Button>
               </Box>
             </Box>

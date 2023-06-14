@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { PostData, singledata } from '../redux/action';
+import { BookmarkData, PostData, singledata } from '../redux/action';
 import { Box, Text, Heading, Image, Stack, Button, Center, SimpleGrid } from '@chakra-ui/react';
 import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
 import { BsFillBookmarkFill } from 'react-icons/bs'
@@ -26,11 +26,15 @@ const Details = () => {
   const { name } = useParams()
   const dispatch = useDispatch()
   const data = useSelector(store => store.datareducer.data)
+ 
   const spinner = useSelector(store => store.datareducer.isLoading)
 
   let Location = data?.location_area_encounters
+  const bookmarkdata = useSelector(store => store.datareducer.bookmarkdata)
+  
   useEffect(() => {
     dispatch(singledata(name))
+    dispatch(BookmarkData)
     if (Location) {
       axios.get(Location)
         .then((res) => setlocation(res.data))
@@ -41,10 +45,34 @@ const Details = () => {
 
 
 
-  const handlebookmark = () => {
-    toast.success("Added to Bookmark")
+  const handlebookmark = async() => {
+    let flag=false
+    for(let i=0; i<bookmarkdata.length; i++){
+if(data.name==bookmarkdata[i].name){
+  flag=true;
+  break;
+  }
+}
+    
+    if(flag){
+      toast.success('Removed From Bookmark', {
+        style: {
+          border: '1px solid #713200',
+          padding: '16px',
+          color: '#713200',
+        },
+        iconTheme: {
+          primary: '#713200',
+          secondary: '#FFFAEE',
+        },
+      });
+      await axios.delete(`https://nice-tan-octopus-toga.cyclic.app/bookmark/${data.id}`)
+    }else{
+      toast.success("Added to Bookmark")
 
-    dispatch(PostData(data))
+      dispatch(PostData(data))
+    }
+    
 
   }
 
