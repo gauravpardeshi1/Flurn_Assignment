@@ -3,7 +3,7 @@ import './App.css';
 import Navbar from './component/Navbar';
 import AllRoutes from './component/AllRoutes';
 import { useSelector } from 'react-redux';
-import PokemonList from './pokemon copy/PokemonList';
+import PokemonList from './pokemon/PokemonList';
 import { QueryClient, QueryClientProvider } from "react-query";
 function App() {
   const queryClient = new QueryClient();

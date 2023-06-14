@@ -4,7 +4,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import { fetchInfinitePokemons } from "../api/pokemon";
 import PokemonCard from "./PokemonCard";
 import Card from './Card'
-import { Box, Center, Spinner } from "@chakra-ui/react";
+import { Box, Center, SimpleGrid, Spinner } from "@chakra-ui/react";
 
 
 
@@ -39,7 +39,8 @@ const PokemonList = () => {
         hasMore={hasNextPage}
 
       >
-        <Box w='90%' padding='20px' margin='auto' display='grid' gridTemplateColumns={'repeat(4,1fr)'} gap='15px' >
+        <Box w='90%' padding='20px' margin='auto'  >
+        <SimpleGrid columns={{sm:2,md:3,lg:4}} gap='15px'>
           {status === "loading" && <Spinner
             mt='30px'
             thickness='4px'
@@ -60,6 +61,7 @@ const PokemonList = () => {
                 />
               ))
             )}
+        </SimpleGrid>
         </Box >
       </InfiniteScroll>
     </>

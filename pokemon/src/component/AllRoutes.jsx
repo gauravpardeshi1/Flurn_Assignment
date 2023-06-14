@@ -5,7 +5,7 @@ import Details from '../pages/Details'
 import Bookmark from '../pages/Bookmark'
 import Search from '../pages/Search'
 
-import PokemonList from '../pokemon copy/PokemonList'
+import PokemonList from '../pokemon/PokemonList'
 const AllRoutes = () => {
   return (
     <Routes>
