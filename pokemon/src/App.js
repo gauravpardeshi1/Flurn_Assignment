@@ -3,15 +3,23 @@ import './App.css';
 import Navbar from './component/Navbar';
 import AllRoutes from './component/AllRoutes';
 import { useSelector } from 'react-redux';
-
+import PokemonList from './pokemon copy/PokemonList';
+import { QueryClient, QueryClientProvider } from "react-query";
 function App() {
-  
+  const queryClient = new QueryClient();
   return (
-    <div className="App">
+    <QueryClientProvider client={queryClient}>
 
-      <Navbar />
-      <AllRoutes />
-    </div>
+
+      <div className="App">
+
+        <Navbar />
+        <AllRoutes />
+
+
+
+      </div>
+    </QueryClientProvider>
   );
 }
 

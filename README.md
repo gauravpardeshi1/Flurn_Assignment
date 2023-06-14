@@ -1,4 +1,5 @@
 # Flurn_Assignment
+
 <h2>End Points</h2>
 <p>List Page :- '/'</p>
 <p>Details Page :- 'details/{name}'</p>
