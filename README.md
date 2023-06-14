@@ -16,7 +16,8 @@
       </div>
   
 </div>
-<img src='https://github.com/gauravpardeshi1/Flurn_Assignment/assets/112778106/4ebfbfd5-273f-4b4a-bdf9-be29d5874379)'/>
+<img src='https://github.com/gauravpardeshi1/Flurn_Assignment/assets/112778106/4fda3ed6-8e66-4f98-bf25-73743fc0f208'/>
+
 <img src='https://github.com/gauravpardeshi1/Flurn_Assignment/assets/112778106/79b4286a-3c66-40f8-bb25-8bd1998946bd'/>
 <img src='https://github.com/gauravpardeshi1/Flurn_Assignment/assets/112778106/fd1ee033-5d3f-4f8c-bb4c-cf5586720ed5'/>
 <img src='https://github.com/gauravpardeshi1/Flurn_Assignment/assets/112778106/34e8e914-ddc6-4a2c-8cab-4dc251d33a24'/>
