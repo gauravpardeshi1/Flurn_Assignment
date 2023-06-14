@@ -25,13 +25,31 @@ const Card = ({ name, url }) => {
 
 
 
-                <Box onClick={() => navigate(`/details/${pokemon.name}`)} padding='15px' h='200px' boxShadow='rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px' alignItems={'center'} className="card"  >
+                <Box onClick={() => navigate(`/details/${pokemon.name}`)}  position='relative'
+  cursor='pointer'
+  width='9rem auto'
+  margin='4px'
+  padding='2rem'
+  border-radius='10px'
+  border-top='0.5px solid #ef5350'
+  border-bottom='0.5px solid #ef5350'
+  text-align='center'
+  boxShadow='0 3px 15px rgba(0, 0, 0, 0.089)' >
                     <Center>
-
-                        <Image w='50%' h='70%' src={pokemon.imageUrl} alt="" />
+<Text position='absolute'
+  top='0'
+  left='0'
+  color='white'
+  background='#ef5350'
+  width='3rem'
+  padding='0.1rem'
+  font-weight='700'
+  borderRadius='0 0 10px 0'>{pokemon.index}</Text>
+                        <Image  width='110px'
+  height='110px' src={pokemon.imageUrl} alt="" />
                     </Center>
                     <Box >
-                        <Heading fontSize={18} fontWeight={500}>{pokemon.index}{pokemon.name}</Heading> </Box>
+                        <Heading fontSize={18} mt='5px' fontWeight={500}>{pokemon.name}</Heading> </Box>
 
                 </Box>
 
